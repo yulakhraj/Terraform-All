@@ -1,0 +1,25 @@
+terraform init
+terraform plan
+terraform apply
+terraform destroy
+
+terraform plan -var "username=manish"
+terraform plan -var "username=manish" -var "age=23"
+
+terraform plan -var-file=development.tfvars
+
+terraform apply --auto-approve
+terraform destroy --target github_repository.terraform-example2
+
+terraform refresh
+terraform show
+terraform console
+terraform fmt
+
+
+ssh-keygen -t rsa
+
+terraform taint aws_security_group.allow_tls      ( delete and re-create )
+
+
+ssh -i abc-key ubuntu@3.111.42.222
