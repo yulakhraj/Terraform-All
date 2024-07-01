@@ -11,5 +11,28 @@ resource "aws_instance" "example" {
   }
 
   user_data = file("${path.module}/script.sh")
+
+# files, local-exec, remote-exec
+connection {
+  type        = "ssh"
+  user        = "ubuntu"
+  private_key = file("${path.module}/abc-key")
+  host        = self.public_ip
 }
 
+provisioner "file" {
+  source      = "commands.txt"
+  destination = "/tmp/commands.txt"
+}
+
+provisioner "file" {
+  content     = "Hi i am manish, i am learning terrafomr"
+  destination = "/tmp/content.md"
+}
+
+provisioner "local-exec" {
+  command = "echo ${self.public_ip} > instance_ip.txt"
+
+}
+
+}

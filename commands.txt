@@ -6,8 +6,6 @@ terraform destroy
 terraform plan -var "username=manish"
 terraform plan -var "username=manish" -var "age=23"
 
-terraform plan -var-file=development.tfvars
-
 terraform apply --auto-approve
 terraform destroy --target github_repository.terraform-example2
 
@@ -16,10 +14,21 @@ terraform show
 terraform console
 terraform fmt
 
-
 ssh-keygen -t rsa
 
 terraform taint aws_security_group.allow_tls      ( delete and re-create )
 
+chmod 600 abc-key
+ssh -i abc-key ubuntu@13.233.73.13
 
-ssh -i abc-key ubuntu@3.111.42.222
+terraform graph | dot -Tpdf > graph.pdf
+
+
+terraform plan --var-file development.tfvars
+terraform plan -var-file=development.tfvars
+terraform workspace show
+terraform workspace list
+terraform workspace new development
+terraform workspace new production
+terraform workspace delete production
+terraform workspace select development
